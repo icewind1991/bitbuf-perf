@@ -5,7 +5,7 @@ Performance comparision for various rust "bit buffer" implementations.
 ## Testing method
 
 - As byte source, 1MB of "`0b0000_0001`" bytes are used
-- The "bit buffer" is used to read `N` bytes into a `u32`
+- The "bit buffer" is used to read `N` bytes into a `u32` using big endian (`bitreader` only support big endian)
 - This is repeated until the end of the buffer, summing the result of every read into a `u32` (wrapping on overflow)
 - This process is repeated 10 times, and the read speed is calculated by averaging all 10 runs
 
