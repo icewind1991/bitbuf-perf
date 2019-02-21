@@ -17,7 +17,7 @@ These results are from a Threadripper 1950X at stock speeds, using rust 1.34.0-n
 | -------------------------------- | --------  | ---------- | ---------- | ---------- | ---------- |
 | [bitreader][bitreader]           | 37.00MB/s | 98.83MB/s  | 119.41MB/s | 127.02MB/s | 150.45MB/s |
 | [bitstream_io][bitstream_io]     | 33.18MB/s | 110.69MB/s | 109.76MB/s | 144.01MB/s | 205.20MB/s |
-| [bitstream_reader][bitstream_io] | 69.85MB/s | 349.36MB/s | 558.16MB/s | 670.59MB/s | 1.36GB/s   |
+| [bitstream_reader][bitstream_reader] | 69.85MB/s | 349.36MB/s | 558.16MB/s | 670.59MB/s | 1.36GB/s   |
 
 [bitreader]: https://github.com/irauta/bitreader
 [bitstream_io]: https://github.com/tuffy/bitstream-io
