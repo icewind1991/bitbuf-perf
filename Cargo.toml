@@ -1,0 +1,10 @@
+[package]
+name = "bitbuf-perf"
+version = "0.1.0"
+authors = ["Robin Appelman <robin@icewind.nl>"]
+edition = "2018"
+
+[dependencies]
+bitstream_reader = { path = "../bitbuffer" }
+bitstream-io = "0.8"
+bitreader = "0.3"
