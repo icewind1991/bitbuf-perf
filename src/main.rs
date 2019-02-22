@@ -19,7 +19,7 @@ fn main() {
         (20, 1775225187)
     ];
     let mut methods: HashMap<String, TestFn> = HashMap::new();
-    methods.insert("bitstream_reader".to_owned(), test_bitbuffer);
+    methods.insert("bitstream_reader".to_owned(), test_bitstream_reader);
     methods.insert("bitstream_io".to_owned(), test_bitstream_io);
     methods.insert("bitreader".to_owned(), test_bitreader);
 
@@ -29,6 +29,15 @@ fn main() {
 
             println!("{} at size {}: {}", name, size, format_speed(speed));
         }
+    }
+
+    let mut padded = vec.clone();
+    padded.extend_from_slice(&[0, 0, 0, 0, 0, 0, 0, 0]);
+
+    for (size, expected) in sizes.iter() {
+        let speed = time_fn(&padded, *size, *expected, test_bitstream_reader_padded);
+
+        println!("bitstream_reader(padded) at size {}: {}", size, format_speed(speed));
     }
 }
 
@@ -62,11 +71,27 @@ fn time_fn(bytes: &Vec<u8>, size: usize, expected: u32, f: TestFn) -> f64 {
     (len * 10) as f64 / duration.as_float_secs()
 }
 
-fn test_bitbuffer(vec: &Vec<u8>, size: usize) -> u32 {
-    let buffer: bitstream_reader::BitBuffer<bitstream_reader::BigEndian> = bitstream_reader::BitBuffer::new(vec.as_slice());
+fn test_bitstream_reader(vec: &Vec<u8>, size: usize) -> u32 {
+    let buffer = bitstream_reader::BitBuffer::new(vec.as_slice(), bitstream_reader::BigEndian);
     let mut acc = 0u32;
     let mut pos = 0;
     let len = buffer.bit_len();
+    loop {
+        if pos + size > len {
+            return acc;
+        }
+        let data = buffer.read::<u32>(pos, size).unwrap();
+        acc = acc.wrapping_add(data);
+        pos += size;
+    }
+}
+
+fn test_bitstream_reader_padded(vec: &Vec<u8>, size: usize) -> u32 {
+    let byte_len = vec.len() - 8;
+    let buffer = bitstream_reader::BitBuffer::from_padded_slice(vec.as_slice(), byte_len, bitstream_reader::BigEndian);
+    let mut acc = 0u32;
+    let mut pos = 0;
+    let len = byte_len * 8;
     loop {
         if pos + size > len {
             return acc;
