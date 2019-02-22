@@ -22,7 +22,6 @@ fn main() {
     methods.insert("bitstream_reader".to_owned(), test_bitbuffer);
     methods.insert("bitstream_io".to_owned(), test_bitstream_io);
     methods.insert("bitreader".to_owned(), test_bitreader);
-    methods.insert("bitbuf".to_owned(), test_bitbuf);
 
     for (name, method) in methods.iter() {
         for (size, expected) in sizes.iter() {
