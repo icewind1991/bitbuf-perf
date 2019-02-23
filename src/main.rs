@@ -1,5 +1,3 @@
-#![feature(duration_float)]
-
 extern crate bitreader;
 extern crate bitstream_io;
 extern crate bitstream_reader;
@@ -67,8 +65,9 @@ fn time_fn(bytes: &Vec<u8>, size: usize, expected: u32, f: TestFn) -> f64 {
     }
 
     let duration = start.elapsed();
+    let duration_float = (duration.as_secs() as f64) + (duration.subsec_nanos() as f64) / 1_000_000_000 as f64;
 
-    (len * 10) as f64 / duration.as_float_secs()
+    (len * 10) as f64 / duration_float
 }
 
 fn test_bitstream_reader(vec: &Vec<u8>, size: usize) -> u32 {
