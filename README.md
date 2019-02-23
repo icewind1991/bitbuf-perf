@@ -13,12 +13,12 @@ Performance comparision for various rust "bit buffer" implementations.
 
 These results are from a Threadripper 1950X at stock speeds, using rust 1.34.0-nightly in release mode on Linux
 
-| Implementation                   | `N = 1`   | `N = 5`    | `N = 8`    | `N = 10`   | `N = 20`   |
-| -------------------------------- | --------  | ---------- | ---------- | ---------- | ---------- |
-| [bitreader][bitreader]           | 37.00MB/s | 98.83MB/s  | 119.41MB/s | 127.02MB/s | 150.45MB/s |
-| [bitstream_io][bitstream_io]     | 33.18MB/s | 110.69MB/s | 109.76MB/s | 144.01MB/s | 205.20MB/s |
-| [bitstream_reader][bitstream_reader] | 69.85MB/s | 349.36MB/s | 558.16MB/s | 670.59MB/s | 1.36GB/s   |
-| [bitstream_reader(padded*)][bitstream_reader] | 107.83MB/s | 538.30MB/s | 869.39MB/s | 1.06GB/s | 2.14GB/s   |
+| Implementation                                | `N = 1`    | `N = 5`    | `N = 8`    | `N = 10`   | `N = 20`   |
+| --------------------------------------------- | ---------- | ---------- | ---------- | ---------- | ---------- |
+| [bitreader][bitreader]                        | 37.00MB/s  | 98.83MB/s  | 119.41MB/s | 127.02MB/s | 150.45MB/s |
+| [bitstream_io][bitstream_io]                  | 33.18MB/s  | 110.69MB/s | 109.76MB/s | 144.01MB/s | 205.20MB/s |
+| [bitstream_reader][bitstream_reader]          | 67.25MB/s  | 389.19MB/s | 626.80MB/s | 793.71MB/s | 1.52GB/s   |
+| [bitstream_reader(padded*)][bitstream_reader] | 120.76MB/s | 610.35MB/s | 993.65MB/s | 1.17GB/s   | 2.40GB/s   |
 
 
    `bitstream_reader` allows further optimizations if the input slice is padded.
