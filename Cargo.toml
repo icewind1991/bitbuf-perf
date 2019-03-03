@@ -5,6 +5,6 @@ authors = ["Robin Appelman <robin@icewind.nl>"]
 edition = "2018"
 
 [dependencies]
-bitstream_reader = "0.2"
+bitstream_reader = { version = "0.3", path = "../bitbuffer" }
 bitstream-io = "0.8"
 bitreader = "0.3"
